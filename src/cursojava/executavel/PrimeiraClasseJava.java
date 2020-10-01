@@ -1,8 +1,11 @@
 package cursojava.executavel;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -12,6 +15,7 @@ import cursojava.classes.Disciplina;
 import cursojava.classes.Secretario;
 import cursojava.classesauxiliares.FuncaoAutenticacao;
 import cursojava.constantes.StatusAluno;
+import cursojava.excecao.ExcecaoProcessarNota;
 import cursojava.interfaces.*;
 
 public class PrimeiraClasseJava {
@@ -19,15 +23,14 @@ public class PrimeiraClasseJava {
 	/* Main é um método que autoexecutável em Java */
 	public static void main(String[] args) {
 		
+		
+		try {
+		
+		  lerAquivo();
+		  
 		String login = JOptionPane.showInputDialog("Digite o Login: ");
 		String senha = JOptionPane.showInputDialog("Digite a Senha: ");
-		
-		//PermitirAcesso secretario = new Secretario(); /* Trabalhando diretamente com o objeto */
-		//secretario.setLogin(login);
-		//secretario.setSenha(senha);
-		
-			
-		/*if(login.equalsIgnoreCase("admin") && senha.equalsIgnoreCase("admin"))*/
+	
 		if(new FuncaoAutenticacao(new Diretor(login, senha)).autenticar()){ /* Vou travar o contrato para autorizar somente quem tem o contrato 100% légitimo */
 
 		/* new Aluno() é uma instância (Criação de Objeto) */
@@ -38,44 +41,32 @@ public class PrimeiraClasseJava {
 		/* É uma lista que dentro dela temos uma chave que identifica uma sequência de valores também */
 		HashMap<String, List<Aluno>> maps = new HashMap<String, List<Aluno>>();
 		
-		
-		/*List<Aluno> alunosAprovados = new ArrayList<Aluno>();
-		List<Aluno> alunosRecuperacao = new ArrayList<Aluno>();
-		List<Aluno> alunosReprovados = new ArrayList<Aluno>();*/
-		
-
-		for (int qtd = 1; qtd <= 5; qtd++) {
+		for (int qtd = 1; qtd <= 1; qtd++) {
 
 			String nome = JOptionPane.showInputDialog("Digite o Nome do Aluno(a) " + qtd + "?: ");
-			/*
-			 * String idade = JOptionPane.showInputDialog("Digite a Idade do Aluno(a)?: ");
-			 * String dataNascimento =
-			 * JOptionPane.showInputDialog("Digite a Data de Nascimento do Aluno(a)?: ");
-			 * String registroGeral =
-			 * JOptionPane.showInputDialog("Digite o Registro Geral do Aluno(a)?: "); String
-			 * cpf = JOptionPane.showInputDialog("Digite o CPF do Aluno(a)?: "); String
-			 * nomeMae = JOptionPane.showInputDialog("Digite o Nome da Mãe do Aluno(a)?: ");
-			 * String nomePai =
-			 * JOptionPane.showInputDialog("Digite o Nome do Pai do Aluno(a)?: "); String
-			 * dataMatricula =
-			 * JOptionPane.showInputDialog("Digite a Data de Matrícula do Aluno(a)?: ");
-			 * String serieMatriculado = JOptionPane.
-			 * showInputDialog("Digite a Série que o Aluno(a) está Matriculado?: "); String
-			 * nomeEscola =
-			 * JOptionPane.showInputDialog("Digite o Nome da Escola do Aluno(a)?: ");
-			 * 
-			 */
+ 			String idade = JOptionPane.showInputDialog("Digite a Idade do Aluno(a)?: ");
+			
+			/*String dataNascimento =	JOptionPane.showInputDialog("Digite a Data de Nascimento do Aluno(a)?: ");
+			String registroGeral = JOptionPane.showInputDialog("Digite o Registro Geral do Aluno(a)?: "); String
+			cpf = JOptionPane.showInputDialog("Digite o CPF do Aluno(a)?: "); String
+			nomeMae = JOptionPane.showInputDialog("Digite o Nome da Mãe do Aluno(a)?: ");
+			String nomePai = JOptionPane.showInputDialog("Digite o Nome do Pai do Aluno(a)?: "); String
+			dataMatricula = JOptionPane.showInputDialog("Digite a Data de Matrícula do Aluno(a)?: ");
+			String serieMatriculado = JOptionPane.showInputDialog("Digite a Série que o Aluno(a) está Matriculado?: "); 
+			String nomeEscola = JOptionPane.showInputDialog("Digite o Nome da Escola do Aluno(a)?: ");
+			*/
+			
 			Aluno aluno1 = new Aluno();
 
 			aluno1.setNome(nome);
-			/*
-			 * aluno1.setIdade(Integer.valueOf(idade));
-			 * aluno1.setDataNascimento(dataNascimento);
-			 * aluno1.setRegistroGeral(registroGeral); aluno1.setNumeroCpf(cpf);
-			 * aluno1.setNomeMae(nomeMae); aluno1.setNomePai(nomePai);
-			 * aluno1.setDataMatricula(dataMatricula);
-			 * aluno1.setSerieMatriculado(serieMatriculado);
-			 * aluno1.setNomeEscola(nomeEscola);
+			aluno1.setIdade(Integer.valueOf(idade));
+			
+			 /*aluno1.setDataNascimento(dataNascimento);
+			  aluno1.setRegistroGeral(registroGeral); aluno1.setNumeroCpf(cpf);
+			  aluno1.setNomeMae(nomeMae); aluno1.setNomePai(nomePai);
+			  aluno1.setDataMatricula(dataMatricula);
+			  aluno1.setSerieMatriculado(serieMatriculado);
+			  aluno1.setNomeEscola(nomeEscola);
 			 */
 
 			for (int pos = 1; pos <= 1; pos++) { 
@@ -84,7 +75,7 @@ public class PrimeiraClasseJava {
 
 				Disciplina disciplina = new Disciplina();
 				disciplina.setDisciplina(nomeDisciplina);
-				disciplina.setNota(Double.valueOf(notaDisciplina));
+				//disciplina.setNota(Double.valueOf(notaDisciplina));
 
 				aluno1.getDisciplinas().add(disciplina);
 
@@ -107,71 +98,11 @@ public class PrimeiraClasseJava {
 
 			}
 			
-			
 			alunos.add(aluno1);
 			
 		}
 		
-		/*for (Aluno aluno : alunos) {
-			if(aluno.getNome().equalsIgnoreCase("joão")) {
-				alunos.remove(aluno);
-				break;
-			} else {
-				System.out.println(aluno.toString());
-				System.out.println("A Média do Aluno " + aluno.getNome() + " é: " + aluno.getMediaNota());
-				System.out.println("O Resultado é: " + aluno.getAlunoAprovado2());
-				System.out.println("----------------------------------------------------------------------");
-			}
-			
-		}
-		
-		for (Aluno aluno : alunos) {
-			System.out.println("Alunos que soboram na lista: ");
-			System.out.println(aluno.getNome());
-			System.out.println("Suas Disciplinas são: ");
-			
-			for(Disciplina disciplina: aluno.getDisciplinas()) {
-				System.out.println(disciplina.getDisciplina());			
-			}
-		}*/
-		
-		
-		/*for (int pos = 0; pos < alunos.size(); pos++) {
-			
-			Aluno aluno = alunos.get(pos);
-			
-			if(aluno.getNome().equalsIgnoreCase("joão")) {
-				 Aluno trocar = new Aluno();
-				 trocar.setNome("Aluno foi trocado");
-				 
-				 Disciplina disciplina = new Disciplina();
-				 disciplina.setDisciplina("Matemática");
-				 disciplina.setNota(96);
-				 
-				 trocar.getDisciplinas().add(disciplina);
-				 
-				 alunos.set(pos, trocar);
-				 aluno = alunos.get(pos);
-				 
-			}
-			
-			System.out.println("Aluno(a): " + aluno.getNome());
-			System.out.println("Média do Aluno(a): " + aluno.getMediaNota());
-			System.out.println("Resultado: " + aluno.getAlunoAprovado2());
-			System.out.println("---------------------------------------------");
-			*/
-			/*for (Disciplina disc : aluno.getDisciplinas()) {
-				System.out.println("Disciplina: " + disc.getDisciplina() + " Nota: " +disc.getNota());
-			}*/
-			
-			/*for (int posd = 0; posd < aluno.getDisciplinas().size(); posd++) {
-				Disciplina disc = aluno.getDisciplinas().get(posd);
-				System.out.println("Disciplina: " + disc.getDisciplina() + " Nota: " +disc.getNota());
-			}
-			
-		}*/
-		
-		
+				
 		maps.put(StatusAluno.APROVADO, new ArrayList<Aluno>());		
 		maps.put(StatusAluno.REPROVADO, new ArrayList<Aluno>());
 		maps.put(StatusAluno.RECUPERACAO, new ArrayList<Aluno>());
@@ -211,6 +142,43 @@ public class PrimeiraClasseJava {
 		   JOptionPane.showInternalMessageDialog(null, "Acesso não Permitido!");
 	   }
 		
+		/*Aqui*/
+		} catch (Exception e) { /* Captura erro de conversão de número */
+			StringBuilder saida = new StringBuilder();
+			/* Imprime o erro no Console Java */
+			e.printStackTrace();
+			
+			/* Mensagem do erro ou causa */
+			System.out.println("Mensagem: " + e.getMessage());
+			
+			for (int i = 0; i < e.getStackTrace().length; i++) {
+				
+				/*System.out.println("Classe de Erro: " + e.getStackTrace()[i].getClassName());
+				System.out.println("Método de Erro: " + e.getStackTrace()[i].getMethodName());
+				System.out.println("Linha de Erro: " + e.getStackTrace()[i].getLineNumber());*/
+				
+				saida.append("\n Classe de Erro: " + e.getStackTrace()[i].getClassName());
+				saida.append("\n Método de Erro: " + e.getStackTrace()[i].getMethodName());
+				saida.append("\n Linha de Erro: " + e.getStackTrace()[i].getLineNumber());
+				saida.append("\n Class: " + e.getClass().getName());
+				
+			}
+			
+			//JOptionPane.showMessageDialog(null, "Erro ao Processar Notas! " + e.getMessage());
+			JOptionPane.showMessageDialog(null, "Erro de conversão de número: " + saida.toString());
+		
+		} finally { /* Sempre é executado ocorrendo erro ou não. Porquê? */
+			/* Finally sempre é usuado quando precisa executar um processo acontecendo erro ou não no sistema. */
+			JOptionPane.showInternalMessageDialog(null, "...Você é aquilo que faz constantemente...!");
+		}
+		
+	}
+	
+	
+	public static void lerAquivo() throws FileNotFoundException {
+		
+			File fil = new File("c://lines.txt");
+			Scanner scanner = new Scanner(fil);
 		
 	}
 

@@ -109,10 +109,5 @@ public class Secretario extends Pessoa implements PermitirAcesso{
 		return login.equals("admin") && senha.equals("admin");
 	}	
 	
-
-	
-	
-	
-	
 	
 }
